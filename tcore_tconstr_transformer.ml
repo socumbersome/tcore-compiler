@@ -15,11 +15,6 @@ let rec transformExpr tc2i expr = match expr with
 	| EVar x -> EVar' x
 	| ELit n -> ELit' n
 	| EConstr name -> (match aLookup tc2i name with
-	(* this doesn't work for constructors with arguments!
-	they're treated like functions now and it entails problems
-	for type inference - instead having its own type,
-	typechecker infers function type, which is wrong!
-	TODO: fix it! either here or in typechecker... *)
 		| Some i -> EConstr' i
 		| None -> raise (UndefTyConstr ("Undefined type constructor "
 		^ name))
