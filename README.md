@@ -74,7 +74,7 @@ main = let t = Node (Node Leaf 2 (Node Leaf 4 Leaf) ) 3
 ## Caveats
 
 * In case expressions, one is allowed to use only patterns with
-depth exactly 1
+depth exactly 1 (so `Cons y ys` is valid, but `x` or `Cons (Cons y ys) zs` are not)
 
 ## Weird conventions
 
@@ -88,7 +88,7 @@ depth exactly 1
 ## To do
 
 * Fix bugs...
-* Allow patterns of arbitrary length
+* Allow patterns of arbitrary depth
 * Implement a garbage collector
 * Implement tail recursion
 
