@@ -34,7 +34,5 @@ let main () =
 		| _ -> print_string usage
 		)
 	;;
-	(*printTypes nt;;*)
-	(*	typecheckOnly <| program;;*)
 
 let _ = main ();;
