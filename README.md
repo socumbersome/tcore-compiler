@@ -2,7 +2,10 @@
 
 1. Building
 2. Syntax
-3. ?
+3. Caveats
+4. Weird conventions
+5. Known bugs
+6. To do
 
 ## Building
 
@@ -35,7 +38,7 @@ prod tree cont = case tree of
 		if n == 0 then 0 else
 		prod left
 		(\ pl . prod right
-			(\ pr . cont (pl * n * r))
+			(\ pr . cont (pl * n * pr))
 		)
 	;
 
@@ -57,3 +60,25 @@ main = let t = Node (Node Leaf 2 (Node Leaf 4 Leaf) ) 3
 	in prod t (\ x . x) == 120
 
 </pre>
+
+## Caveats
+
+* In case expressions, one is allowed to use only patterns with
+depth exactly 1
+
+## Weird conventions
+
+* Because Core is untyped and doesn't carry type information from TCore, its output has only two forms: either it's a number, or a structure with a tag, arity and list of contents that again can be numbers or structures.
+* true value is represented as a structure [2: ], and false as [1: ]
+
+## Known bugs
+
+* Typechecker in TCore is insensitive for types in arguments in type constructors - it looks only at the number of arguments (for example, in `Node (Tree a) a (Tree a)`, one can put `Node 1 2 3` into code and typechecker won't notice the malice
+
+## To do
+
+* Fix bugs...
+* Allow patterns of arbitrary length
+* Implement a garbage collector
+* Implement tail recursion
+
