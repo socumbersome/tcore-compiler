@@ -1,0 +1,14 @@
+pushglobal compose
+pushglobal I
+pushglobal I
+pushglobal I
+   1) Output:"3 "
+       Stack:[]
+       Dump:[]
+      VStack:[]
+       Code:{}
+      
+      
+
+
+Steps taken = 53

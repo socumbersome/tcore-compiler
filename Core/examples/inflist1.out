@@ -1,0 +1,21 @@
+pushglobal compose
+pushglobal K
+pushglobal abort
+pushglobal K1
+pushglobal abort
+pushglobal abort
+pushglobal cons
+pushglobal infinite
+pushglobal hd
+pushglobal tl
+pushglobal infinite
+   1) Output:"4 "
+       Stack:[]
+       Dump:[]
+      VStack:[]
+       Code:{}
+      
+      
+
+
+Steps taken = 127

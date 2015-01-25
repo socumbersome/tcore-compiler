@@ -1,0 +1,12 @@
+id x_0 = x_0;
+compose f_1 g_2 x_3 = f_1 (g_2 x_3);
+twice f_4 = compose f_4 f_4;
+k x_5 y_6 = x_5;
+k1 x_7 y_8 = y_8;
+cons a_9 b_10 cc_11 cn_12 = cc_11 a_9 b_10;
+nil cc_13 cn_14 = cn_14;
+abort  = abort;
+hd list_15 = list_15 k abort;
+tl list_16 = list_16 k1 abort;
+infinite x_17 = cons x_17 (infinite x_17);
+main  = hd (tl (infinite 4))

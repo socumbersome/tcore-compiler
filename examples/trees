@@ -1,0 +1,20 @@
+
+type Tree a = Leaf | Node (Tree a) a (Tree a) ;
+
+prod_cps tree cont = case tree of
+	Leaf -> cont 1 ,
+	Node left n right ->
+		if n == 0 then 0 else
+		prod_cps left
+		(\pl. prod_cps right
+			(\pr. cont (pl * n * pr))
+		)
+	;
+
+prod tree = prod_cps tree (\x. x);
+
+tr0 = Node (Node Leaf 2 (Node Leaf 4 Leaf) ) 3 (Node (Node Leaf 0 Leaf) 5 Leaf );
+
+tr1 = Node (Node Leaf 2 (Node Leaf 4 Leaf) ) 3 (Node (Node Leaf 1 Leaf) 5 Leaf );
+
+main = prod tr1

@@ -1,0 +1,387 @@
+Supercombinator definitions
+Code for main
+ Code:{Pushint 5
+       Pushint 2
+       Sub
+       Pushint 5
+       Pushint 4
+       Mul
+       Add
+       Update 0
+       Pop 0
+       Unwind}
+
+
+
+Code for I
+ Code:{Push 0
+       Eval
+       Update 1
+       Pop 1
+       Unwind}
+
+
+
+Code for K
+ Code:{Push 0
+       Eval
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for K1
+ Code:{Push 1
+       Eval
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for S
+ Code:{Push 2
+       Push 2
+       MkAppl
+       Push 3
+       Push 2
+       MkAppl
+       MkAppl
+       Eval
+       Update 3
+       Pop 3
+       Unwind}
+
+
+
+Code for compose
+ Code:{Push 2
+       Push 2
+       MkAppl
+       Push 1
+       MkAppl
+       Eval
+       Update 3
+       Pop 3
+       Unwind}
+
+
+
+Code for twice
+ Code:{Push 0
+       Push 1
+       Pushglobal compose
+       MkAppl
+       MkAppl
+       Eval
+       Update 1
+       Pop 1
+       Unwind}
+
+
+
+Code for +
+ Code:{Push 1
+       Eval
+       Push 1
+       Eval
+       Add
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for -
+ Code:{Push 1
+       Eval
+       Push 1
+       Eval
+       Sub
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for *
+ Code:{Push 1
+       Eval
+       Push 1
+       Eval
+       Mul
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for /
+ Code:{Push 1
+       Eval
+       Push 1
+       Eval
+       Div
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for neg
+ Code:{Push 0
+       Eval
+       Neg
+       Update 1
+       Pop 1
+       Unwind}
+
+
+
+Code for ==
+ Code:{Push 1
+       Eval
+       Push 1
+       Eval
+       Eq
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for !=
+ Code:{Push 1
+       Eval
+       Push 1
+       Eval
+       Ne
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for <
+ Code:{Push 1
+       Eval
+       Push 1
+       Eval
+       Lt
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for <=
+ Code:{Push 1
+       Eval
+       Push 1
+       Eval
+       Le
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for >
+ Code:{Push 1
+       Eval
+       Push 1
+       Eval
+       Gt
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for >=
+ Code:{Push 1
+       Eval
+       Push 1
+       Eval
+       Ge
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for if
+ Code:{Push 0
+       Eval
+       (Cond
+       1 -> {Push 1}
+       0 -> {Push 2})
+       Update 3
+       Pop 3
+       Unwind}
+
+
+
+
+State transitions
+
+   1) Output:""
+       Stack:[]
+       Dump:[]
+       Code:{Pushglobal main
+             Eval
+             Print}
+      
+      
+   2) Output:""
+       Stack:[#1: Global main]
+       Dump:[]
+       Code:{Eval
+             Print}
+      
+      
+   3) Output:""
+       Stack:[#1: Global main]
+       Dump:[<{Print}, []>]
+       Code:{Unwind}
+      
+      
+   4) Output:""
+       Stack:[#1: Global main]
+       Dump:[<{Print}, []>]
+       Code:{Pushint 5
+             Pushint 2
+             Sub
+             Pushint 5
+             Pushint 4
+             Mul
+             Add
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   5) Output:""
+       Stack:[#1: Global main
+              #20: 5]
+       Dump:[<{Print}, []>]
+       Code:{Pushint 2
+             Sub
+             Pushint 5
+             Pushint 4
+             Mul
+             Add
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   6) Output:""
+       Stack:[#1: Global main
+              #20: 5
+              #21: 2]
+       Dump:[<{Print}, []>]
+       Code:{Sub
+             Pushint 5
+             Pushint 4
+             Mul
+             Add
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   7) Output:""
+       Stack:[#1: Global main
+              #22: -3]
+       Dump:[<{Print}, []>]
+       Code:{Pushint 5
+             Pushint 4
+             Mul
+             Add
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   8) Output:""
+       Stack:[#1: Global main
+              #22: -3
+              #20: 5]
+       Dump:[<{Print}, []>]
+       Code:{Pushint 4
+             Mul
+             Add
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   9) Output:""
+       Stack:[#1: Global main
+              #22: -3
+              #20: 5
+              #23: 4]
+       Dump:[<{Print}, []>]
+       Code:{Mul
+             Add
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+  10) Output:""
+       Stack:[#1: Global main
+              #22: -3
+              #24: 20]
+       Dump:[<{Print}, []>]
+       Code:{Add
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+  11) Output:""
+       Stack:[#1: Global main
+              #25: 17]
+       Dump:[<{Print}, []>]
+       Code:{Update 0
+             Pop 0
+             Unwind}
+      
+      
+  12) Output:""
+       Stack:[#1: Ind #25]
+       Dump:[<{Print}, []>]
+       Code:{Pop 0
+             Unwind}
+      
+      
+  13) Output:""
+       Stack:[#1: Ind #25]
+       Dump:[<{Print}, []>]
+       Code:{Unwind}
+      
+      
+  14) Output:""
+       Stack:[#25: 17]
+       Dump:[<{Print}, []>]
+       Code:{Unwind}
+      
+      
+  15) Output:""
+       Stack:[#25: 17]
+       Dump:[]
+       Code:{Print}
+      
+      
+  16) Output:" 17"
+       Stack:[]
+       Dump:[]
+       Code:{}
+      
+      
+
+
+Steps taken = 15

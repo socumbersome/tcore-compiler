@@ -1,0 +1,39 @@
+f x_0= let
+  g_1 = let
+          
+        in #sc
+in g_1 (g_1 x_0);
+$sc_2 y_3= y_3 + 1;
+main = 1;
+length xs_4= case xs_4 of
+  {1} -> 0,
+  {2} y_5 ys_6-> 1 + (length ys_6);
+take n_7 xs_8= case xs_8 of
+  {1} -> nil,
+  {2} y_9 ys_10-> if n_7 == 0 then
+                    nil
+                  else
+                    cons y_9 (take (n_7 - 1) ys_10);
+take_ n_11 xs_12= if n_11 == 0 then
+  nil
+else
+  case xs_12 of
+    {1} -> nil,
+    {2} y_13 ys_14-> cons y_13 (take (n_11 - 1) ys_14);
+downfrom n_15= if n_15 == 0 then
+  nil
+else
+  cons n_15 (downfrom (n_15 - 1));
+make n_16 a_17= if n_16 == 0 then
+  nil
+else
+  cons a_17 (make (n_16 - 1) a_17);
+from n_18= cons n_18 (from (n_18 + 1));
+filter p_19 xs_20= case xs_20 of
+  {1} -> nil,
+  {2} y_21 ys_22-> let
+                     rest_23 = filter p_19 ys_22
+                   in if p_19 y_21 then
+                     cons y_21 rest_23
+                   else
+                     rest_23

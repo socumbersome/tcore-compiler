@@ -1,0 +1,5 @@
+x = true;
+y= false;
+z = true;
+
+main = x & not y | not z

@@ -1,0 +1,12 @@
+id x = x;
+compose f g x = f (g x);
+twice f = compose f f;
+k x y = x;
+k1 x y = y;
+cons a b cc cn = cc a b;
+nil cc cn = cn;
+abort  = abort;
+hd list = list k abort;
+tl list = list k1 abort;
+infinite x = cons x (infinite x);
+main  = hd (tl (infinite 4))

@@ -1,0 +1,11 @@
+cons a b cc cn = cc a b ;
+nil cc cn = cn ;
+k x y = x ;
+k1 x y = y ;
+hd list = list k abort ;
+tl list = list k1 abort ;
+abort = abort ;
+nic x = 1 ;
+infinite x = cons x (infinite x) ;
+
+main = nic (infinite 4)

@@ -1,0 +1,1135 @@
+Supercombinator definitions
+Code for cons
+ Code:{Push 1
+       Push 1
+       Push 4
+       MkAppl
+       MkAppl
+       Update 4
+       Pop 4
+       Unwind}
+
+
+
+Code for nil
+ Code:{Push 1
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for hd
+ Code:{Pushglobal abort
+       Pushglobal K
+       Push 2
+       MkAppl
+       MkAppl
+       Update 1
+       Pop 1
+       Unwind}
+
+
+
+Code for tl
+ Code:{Pushglobal abort
+       Pushglobal K1
+       Push 2
+       MkAppl
+       MkAppl
+       Update 1
+       Pop 1
+       Unwind}
+
+
+
+Code for abort
+ Code:{Pushglobal abort
+       Update 0
+       Pop 0
+       Unwind}
+
+
+
+Code for infinite
+ Code:{Push 0
+       Pushglobal infinite
+       MkAppl
+       Push 1
+       Pushglobal cons
+       MkAppl
+       MkAppl
+       Update 1
+       Pop 1
+       Unwind}
+
+
+
+Code for main
+ Code:{Pushint 4
+       Pushglobal infinite
+       MkAppl
+       Pushglobal tl
+       MkAppl
+       Pushglobal hd
+       MkAppl
+       Update 0
+       Pop 0
+       Unwind}
+
+
+
+Code for I
+ Code:{Push 0
+       Update 1
+       Pop 1
+       Unwind}
+
+
+
+Code for K
+ Code:{Push 0
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for K1
+ Code:{Push 1
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for S
+ Code:{Push 2
+       Push 2
+       MkAppl
+       Push 3
+       Push 2
+       MkAppl
+       MkAppl
+       Update 3
+       Pop 3
+       Unwind}
+
+
+
+Code for compose
+ Code:{Push 2
+       Push 2
+       MkAppl
+       Push 1
+       MkAppl
+       Update 3
+       Pop 3
+       Unwind}
+
+
+
+Code for twice
+ Code:{Push 0
+       Push 1
+       Pushglobal compose
+       MkAppl
+       MkAppl
+       Update 1
+       Pop 1
+       Unwind}
+
+
+
+
+State transitions
+
+   1)  Stack:[]
+       Code:{Pushglobal main
+             Unwind}
+      
+      
+   2)  Stack:[#7: Global main]
+       Code:{Unwind}
+      
+      
+   3)  Stack:[#7: Global main]
+       Code:{Pushint 4
+             Pushglobal infinite
+             MkAppl
+             Pushglobal tl
+             MkAppl
+             Pushglobal hd
+             MkAppl
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   4)  Stack:[#7: Global main
+              #14: 4]
+       Code:{Pushglobal infinite
+             MkAppl
+             Pushglobal tl
+             MkAppl
+             Pushglobal hd
+             MkAppl
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   5)  Stack:[#7: Global main
+              #14: 4
+              #6: Global infinite]
+       Code:{MkAppl
+             Pushglobal tl
+             MkAppl
+             Pushglobal hd
+             MkAppl
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   6)  Stack:[#7: Global main
+              #15: Appl #6 #14]
+       Code:{Pushglobal tl
+             MkAppl
+             Pushglobal hd
+             MkAppl
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   7)  Stack:[#7: Global main
+              #15: Appl #6 #14
+              #4: Global tl]
+       Code:{MkAppl
+             Pushglobal hd
+             MkAppl
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   8)  Stack:[#7: Global main
+              #16: Appl #4 #15]
+       Code:{Pushglobal hd
+             MkAppl
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   9)  Stack:[#7: Global main
+              #16: Appl #4 #15
+              #3: Global hd]
+       Code:{MkAppl
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+  10)  Stack:[#7: Global main
+              #17: Appl #3 #16]
+       Code:{Update 0
+             Pop 0
+             Unwind}
+      
+      
+  11)  Stack:[#7: Ind #17]
+       Code:{Pop 0
+             Unwind}
+      
+      
+  12)  Stack:[#7: Ind #17]
+       Code:{Unwind}
+      
+      
+  13)  Stack:[#17: Appl #3 #16]
+       Code:{Unwind}
+      
+      
+  14)  Stack:[#17: Appl #3 #16
+              #3: Global hd]
+       Code:{Unwind}
+      
+      
+  15)  Stack:[#17: Appl #3 #16
+              #16: Appl #4 #15]
+       Code:{Pushglobal abort
+             Pushglobal K
+             Push 2
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  16)  Stack:[#17: Appl #3 #16
+              #16: Appl #4 #15
+              #5: Global abort]
+       Code:{Pushglobal K
+             Push 2
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  17)  Stack:[#17: Appl #3 #16
+              #16: Appl #4 #15
+              #5: Global abort
+              #9: Global K]
+       Code:{Push 2
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  18)  Stack:[#17: Appl #3 #16
+              #16: Appl #4 #15
+              #5: Global abort
+              #9: Global K
+              #16: Appl #4 #15]
+       Code:{MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  19)  Stack:[#17: Appl #3 #16
+              #16: Appl #4 #15
+              #5: Global abort
+              #18: Appl #16 #9]
+       Code:{MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  20)  Stack:[#17: Appl #3 #16
+              #16: Appl #4 #15
+              #19: Appl #18 #5]
+       Code:{Update 1
+             Pop 1
+             Unwind}
+      
+      
+  21)  Stack:[#17: Ind #19
+              #16: Appl #4 #15]
+       Code:{Pop 1
+             Unwind}
+      
+      
+  22)  Stack:[#17: Ind #19]
+       Code:{Unwind}
+      
+      
+  23)  Stack:[#19: Appl #18 #5]
+       Code:{Unwind}
+      
+      
+  24)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9]
+       Code:{Unwind}
+      
+      
+  25)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #16: Appl #4 #15]
+       Code:{Unwind}
+      
+      
+  26)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #16: Appl #4 #15
+              #4: Global tl]
+       Code:{Unwind}
+      
+      
+  27)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #16: Appl #4 #15
+              #15: Appl #6 #14]
+       Code:{Pushglobal abort
+             Pushglobal K1
+             Push 2
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  28)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #16: Appl #4 #15
+              #15: Appl #6 #14
+              #5: Global abort]
+       Code:{Pushglobal K1
+             Push 2
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  29)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #16: Appl #4 #15
+              #15: Appl #6 #14
+              #5: Global abort
+              #10: Global K1]
+       Code:{Push 2
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  30)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #16: Appl #4 #15
+              #15: Appl #6 #14
+              #5: Global abort
+              #10: Global K1
+              #15: Appl #6 #14]
+       Code:{MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  31)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #16: Appl #4 #15
+              #15: Appl #6 #14
+              #5: Global abort
+              #20: Appl #15 #10]
+       Code:{MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  32)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #16: Appl #4 #15
+              #15: Appl #6 #14
+              #21: Appl #20 #5]
+       Code:{Update 1
+             Pop 1
+             Unwind}
+      
+      
+  33)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #16: Ind #21
+              #15: Appl #6 #14]
+       Code:{Pop 1
+             Unwind}
+      
+      
+  34)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #16: Ind #21]
+       Code:{Unwind}
+      
+      
+  35)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5]
+       Code:{Unwind}
+      
+      
+  36)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10]
+       Code:{Unwind}
+      
+      
+  37)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #15: Appl #6 #14]
+       Code:{Unwind}
+      
+      
+  38)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #15: Appl #6 #14
+              #6: Global infinite]
+       Code:{Unwind}
+      
+      
+  39)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #15: Appl #6 #14
+              #14: 4]
+       Code:{Push 0
+             Pushglobal infinite
+             MkAppl
+             Push 1
+             Pushglobal cons
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  40)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #15: Appl #6 #14
+              #14: 4
+              #14: 4]
+       Code:{Pushglobal infinite
+             MkAppl
+             Push 1
+             Pushglobal cons
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  41)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #15: Appl #6 #14
+              #14: 4
+              #14: 4
+              #6: Global infinite]
+       Code:{MkAppl
+             Push 1
+             Pushglobal cons
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  42)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #15: Appl #6 #14
+              #14: 4
+              #22: Appl #6 #14]
+       Code:{Push 1
+             Pushglobal cons
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  43)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #15: Appl #6 #14
+              #14: 4
+              #22: Appl #6 #14
+              #14: 4]
+       Code:{Pushglobal cons
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  44)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #15: Appl #6 #14
+              #14: 4
+              #22: Appl #6 #14
+              #14: 4
+              #1: Global cons]
+       Code:{MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  45)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #15: Appl #6 #14
+              #14: 4
+              #22: Appl #6 #14
+              #23: Appl #1 #14]
+       Code:{MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  46)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #15: Appl #6 #14
+              #14: 4
+              #24: Appl #23 #22]
+       Code:{Update 1
+             Pop 1
+             Unwind}
+      
+      
+  47)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #15: Ind #24
+              #14: 4]
+       Code:{Pop 1
+             Unwind}
+      
+      
+  48)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #15: Ind #24]
+       Code:{Unwind}
+      
+      
+  49)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #24: Appl #23 #22]
+       Code:{Unwind}
+      
+      
+  50)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #24: Appl #23 #22
+              #23: Appl #1 #14]
+       Code:{Unwind}
+      
+      
+  51)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #20: Appl #15 #10
+              #24: Appl #23 #22
+              #23: Appl #1 #14
+              #1: Global cons]
+       Code:{Unwind}
+      
+      
+  52)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #5: Global abort
+              #10: Global K1
+              #22: Appl #6 #14
+              #14: 4]
+       Code:{Push 1
+             Push 1
+             Push 4
+             MkAppl
+             MkAppl
+             Update 4
+             Pop 4
+             Unwind}
+      
+      
+  53)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #5: Global abort
+              #10: Global K1
+              #22: Appl #6 #14
+              #14: 4
+              #22: Appl #6 #14]
+       Code:{Push 1
+             Push 4
+             MkAppl
+             MkAppl
+             Update 4
+             Pop 4
+             Unwind}
+      
+      
+  54)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #5: Global abort
+              #10: Global K1
+              #22: Appl #6 #14
+              #14: 4
+              #22: Appl #6 #14
+              #14: 4]
+       Code:{Push 4
+             MkAppl
+             MkAppl
+             Update 4
+             Pop 4
+             Unwind}
+      
+      
+  55)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #5: Global abort
+              #10: Global K1
+              #22: Appl #6 #14
+              #14: 4
+              #22: Appl #6 #14
+              #14: 4
+              #10: Global K1]
+       Code:{MkAppl
+             MkAppl
+             Update 4
+             Pop 4
+             Unwind}
+      
+      
+  56)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #5: Global abort
+              #10: Global K1
+              #22: Appl #6 #14
+              #14: 4
+              #22: Appl #6 #14
+              #25: Appl #10 #14]
+       Code:{MkAppl
+             Update 4
+             Pop 4
+             Unwind}
+      
+      
+  57)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Appl #20 #5
+              #5: Global abort
+              #10: Global K1
+              #22: Appl #6 #14
+              #14: 4
+              #26: Appl #25 #22]
+       Code:{Update 4
+             Pop 4
+             Unwind}
+      
+      
+  58)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Ind #26
+              #5: Global abort
+              #10: Global K1
+              #22: Appl #6 #14
+              #14: 4]
+       Code:{Pop 4
+             Unwind}
+      
+      
+  59)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #21: Ind #26]
+       Code:{Unwind}
+      
+      
+  60)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #26: Appl #25 #22]
+       Code:{Unwind}
+      
+      
+  61)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #26: Appl #25 #22
+              #25: Appl #10 #14]
+       Code:{Unwind}
+      
+      
+  62)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #26: Appl #25 #22
+              #25: Appl #10 #14
+              #10: Global K1]
+       Code:{Unwind}
+      
+      
+  63)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #26: Appl #25 #22
+              #22: Appl #6 #14
+              #14: 4]
+       Code:{Push 1
+             Update 2
+             Pop 2
+             Unwind}
+      
+      
+  64)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #26: Appl #25 #22
+              #22: Appl #6 #14
+              #14: 4
+              #22: Appl #6 #14]
+       Code:{Update 2
+             Pop 2
+             Unwind}
+      
+      
+  65)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #26: Ind #22
+              #22: Appl #6 #14
+              #14: 4]
+       Code:{Pop 2
+             Unwind}
+      
+      
+  66)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #26: Ind #22]
+       Code:{Unwind}
+      
+      
+  67)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #22: Appl #6 #14]
+       Code:{Unwind}
+      
+      
+  68)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #22: Appl #6 #14
+              #6: Global infinite]
+       Code:{Unwind}
+      
+      
+  69)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #22: Appl #6 #14
+              #14: 4]
+       Code:{Push 0
+             Pushglobal infinite
+             MkAppl
+             Push 1
+             Pushglobal cons
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  70)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #22: Appl #6 #14
+              #14: 4
+              #14: 4]
+       Code:{Pushglobal infinite
+             MkAppl
+             Push 1
+             Pushglobal cons
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  71)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #22: Appl #6 #14
+              #14: 4
+              #14: 4
+              #6: Global infinite]
+       Code:{MkAppl
+             Push 1
+             Pushglobal cons
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  72)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #22: Appl #6 #14
+              #14: 4
+              #27: Appl #6 #14]
+       Code:{Push 1
+             Pushglobal cons
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  73)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #22: Appl #6 #14
+              #14: 4
+              #27: Appl #6 #14
+              #14: 4]
+       Code:{Pushglobal cons
+             MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  74)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #22: Appl #6 #14
+              #14: 4
+              #27: Appl #6 #14
+              #14: 4
+              #1: Global cons]
+       Code:{MkAppl
+             MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  75)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #22: Appl #6 #14
+              #14: 4
+              #27: Appl #6 #14
+              #28: Appl #1 #14]
+       Code:{MkAppl
+             Update 1
+             Pop 1
+             Unwind}
+      
+      
+  76)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #22: Appl #6 #14
+              #14: 4
+              #29: Appl #28 #27]
+       Code:{Update 1
+             Pop 1
+             Unwind}
+      
+      
+  77)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #22: Ind #29
+              #14: 4]
+       Code:{Pop 1
+             Unwind}
+      
+      
+  78)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #22: Ind #29]
+       Code:{Unwind}
+      
+      
+  79)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #29: Appl #28 #27]
+       Code:{Unwind}
+      
+      
+  80)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #29: Appl #28 #27
+              #28: Appl #1 #14]
+       Code:{Unwind}
+      
+      
+  81)  Stack:[#19: Appl #18 #5
+              #18: Appl #16 #9
+              #29: Appl #28 #27
+              #28: Appl #1 #14
+              #1: Global cons]
+       Code:{Unwind}
+      
+      
+  82)  Stack:[#19: Appl #18 #5
+              #5: Global abort
+              #9: Global K
+              #27: Appl #6 #14
+              #14: 4]
+       Code:{Push 1
+             Push 1
+             Push 4
+             MkAppl
+             MkAppl
+             Update 4
+             Pop 4
+             Unwind}
+      
+      
+  83)  Stack:[#19: Appl #18 #5
+              #5: Global abort
+              #9: Global K
+              #27: Appl #6 #14
+              #14: 4
+              #27: Appl #6 #14]
+       Code:{Push 1
+             Push 4
+             MkAppl
+             MkAppl
+             Update 4
+             Pop 4
+             Unwind}
+      
+      
+  84)  Stack:[#19: Appl #18 #5
+              #5: Global abort
+              #9: Global K
+              #27: Appl #6 #14
+              #14: 4
+              #27: Appl #6 #14
+              #14: 4]
+       Code:{Push 4
+             MkAppl
+             MkAppl
+             Update 4
+             Pop 4
+             Unwind}
+      
+      
+  85)  Stack:[#19: Appl #18 #5
+              #5: Global abort
+              #9: Global K
+              #27: Appl #6 #14
+              #14: 4
+              #27: Appl #6 #14
+              #14: 4
+              #9: Global K]
+       Code:{MkAppl
+             MkAppl
+             Update 4
+             Pop 4
+             Unwind}
+      
+      
+  86)  Stack:[#19: Appl #18 #5
+              #5: Global abort
+              #9: Global K
+              #27: Appl #6 #14
+              #14: 4
+              #27: Appl #6 #14
+              #30: Appl #9 #14]
+       Code:{MkAppl
+             Update 4
+             Pop 4
+             Unwind}
+      
+      
+  87)  Stack:[#19: Appl #18 #5
+              #5: Global abort
+              #9: Global K
+              #27: Appl #6 #14
+              #14: 4
+              #31: Appl #30 #27]
+       Code:{Update 4
+             Pop 4
+             Unwind}
+      
+      
+  88)  Stack:[#19: Ind #31
+              #5: Global abort
+              #9: Global K
+              #27: Appl #6 #14
+              #14: 4]
+       Code:{Pop 4
+             Unwind}
+      
+      
+  89)  Stack:[#19: Ind #31]
+       Code:{Unwind}
+      
+      
+  90)  Stack:[#31: Appl #30 #27]
+       Code:{Unwind}
+      
+      
+  91)  Stack:[#31: Appl #30 #27
+              #30: Appl #9 #14]
+       Code:{Unwind}
+      
+      
+  92)  Stack:[#31: Appl #30 #27
+              #30: Appl #9 #14
+              #9: Global K]
+       Code:{Unwind}
+      
+      
+  93)  Stack:[#31: Appl #30 #27
+              #27: Appl #6 #14
+              #14: 4]
+       Code:{Push 0
+             Update 2
+             Pop 2
+             Unwind}
+      
+      
+  94)  Stack:[#31: Appl #30 #27
+              #27: Appl #6 #14
+              #14: 4
+              #14: 4]
+       Code:{Update 2
+             Pop 2
+             Unwind}
+      
+      
+  95)  Stack:[#31: Ind #14
+              #27: Appl #6 #14
+              #14: 4]
+       Code:{Pop 2
+             Unwind}
+      
+      
+  96)  Stack:[#31: Ind #14]
+       Code:{Unwind}
+      
+      
+  97)  Stack:[#14: 4]
+       Code:{Unwind}
+      
+      
+  98)  Stack:[#14: 4]
+       Code:{}
+      
+      
+
+
+Steps taken = 97

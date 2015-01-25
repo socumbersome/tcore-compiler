@@ -1,0 +1,16 @@
+pushglobal compose
+pushglobal fib
+pushglobal -
+pushglobal fib
+pushglobal -
+pushglobal fib
+   1) Output:"8 "
+       Stack:[]
+       Dump:[]
+      VStack:[]
+       Code:{}
+      
+      
+
+
+Steps taken = 591

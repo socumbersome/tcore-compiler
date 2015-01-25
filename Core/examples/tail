@@ -1,0 +1,10 @@
+
+sum n =
+	letrec aux = \ m acc.
+		if m > n then
+			acc
+		else
+			aux (m+1) (acc+m)
+	in aux 0 0 ;
+
+main = sum 100

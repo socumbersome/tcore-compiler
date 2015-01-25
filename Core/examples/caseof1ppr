@@ -1,0 +1,10 @@
+cons = Pack{2,2};
+nil = Pack{1,0};
+length xs= case xs of
+  {1} -> 0,
+  {2} y ys-> 1 + (length ys);
+f x= Pack{2,2} (case x of
+  {1} -> 1,
+  {2} -> 2) (Pack{1,0});
+prefix p xs= map (Pack{2,2} p) xs;
+main = length cons 1 (cons 2 nil)

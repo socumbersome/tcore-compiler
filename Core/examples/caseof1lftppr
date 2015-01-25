@@ -1,0 +1,11 @@
+length xs= case xs of
+  {1} -> 0,
+  {2} y ys-> 1 + (length ys);
+f x= Pack{2,2} (Case#_0 (t x (1 + 7))) (Pack{1,0});
+Case#_0 x= case x of
+  {1} -> 1,
+  {2} -> 2;
+prefix p xs= map (Pack{2,2} p) xs;
+main = length cons 1 (cons 2 nil);
+cons = Pack{2,2};
+nil = Pack{1,0}

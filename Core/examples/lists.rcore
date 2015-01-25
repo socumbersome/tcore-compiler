@@ -1,0 +1,26 @@
+id x = x;
+compose f g x = f (g x);
+twice f = compose f f;
+length xs = case xs of
+  {1}  -> 0,
+  {2} y ys -> 1 + (length ys);
+downfrom n = if n == 0 then
+  Pack{1,0}
+else
+  Pack{2,2} n (downfrom (n - 1));
+filter p xs = case xs of
+  {1}  -> Pack{1,0},
+  {2} y ys -> let
+                rest = filter p ys
+              in if p y then
+                Pack{2,2} y rest
+              else
+                rest;
+take n xs = case xs of
+  {1}  -> Pack{1,0},
+  {2} y ys -> if n == 0 then
+                Pack{1,0}
+              else
+                Pack{2,2} y (take (n - 1) ys);
+from n = Pack{2,2} n (from (n + 1));
+main  = downfrom 4

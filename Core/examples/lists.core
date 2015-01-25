@@ -1,0 +1,6 @@
+
+downfrom n_8 = if n_8 == 0 then
+  Pack{1,0}
+else
+  Pack{2,2} n_8 (downfrom (n_8 - 1));
+main  = downfrom 4

@@ -1,0 +1,919 @@
+Supercombinator definitions
+Code for I
+ Code:{Push 0
+       Eval
+       Update 1
+       Pop 1
+       Unwind}
+
+
+
+Code for K
+ Code:{Push 0
+       Eval
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for K1
+ Code:{Push 1
+       Eval
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for S
+ Code:{Push 2
+       Push 2
+       MkAppl
+       Push 3
+       Push 2
+       MkAppl
+       MkAppl
+       Eval
+       Update 3
+       Pop 3
+       Unwind}
+
+
+
+Code for compose
+ Code:{Push 2
+       Push 2
+       MkAppl
+       Push 1
+       MkAppl
+       Eval
+       Update 3
+       Pop 3
+       Unwind}
+
+
+
+Code for twice
+ Code:{Push 0
+       Push 1
+       Pushglobal compose
+       MkAppl
+       MkAppl
+       Eval
+       Update 1
+       Pop 1
+       Unwind}
+
+
+
+Code for +
+ Code:{Push 1
+       Eval
+       S2V
+       Push 0
+       Eval
+       S2V
+       Add
+       Mkint
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for -
+ Code:{Push 1
+       Eval
+       S2V
+       Push 0
+       Eval
+       S2V
+       Sub
+       Mkint
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for *
+ Code:{Push 1
+       Eval
+       S2V
+       Push 0
+       Eval
+       S2V
+       Mul
+       Mkint
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for /
+ Code:{Push 1
+       Eval
+       S2V
+       Push 0
+       Eval
+       S2V
+       Div
+       Mkint
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for neg
+ Code:{Push 0
+       Eval
+       S2V
+       Neg
+       Mkint
+       Update 1
+       Pop 1
+       Unwind}
+
+
+
+Code for ==
+ Code:{Push 1
+       Eval
+       S2V
+       Push 0
+       Eval
+       S2V
+       Eq
+       Mkbool
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for !=
+ Code:{Push 1
+       Eval
+       S2V
+       Push 0
+       Eval
+       S2V
+       Ne
+       Mkbool
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for >=
+ Code:{Push 1
+       Eval
+       S2V
+       Push 0
+       Eval
+       S2V
+       Ge
+       Mkbool
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for >
+ Code:{Push 1
+       Eval
+       S2V
+       Push 0
+       Eval
+       S2V
+       Gt
+       Mkbool
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for <=
+ Code:{Push 1
+       Eval
+       S2V
+       Push 0
+       Eval
+       S2V
+       Le
+       Mkbool
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for <
+ Code:{Push 1
+       Eval
+       S2V
+       Push 0
+       Eval
+       S2V
+       Lt
+       Mkbool
+       Update 2
+       Pop 2
+       Unwind}
+
+
+
+Code for if
+ Code:{Push 0
+       Eval
+       S2V
+       (Cond
+       1 -> {Push 1; Eval; Update 3; ...}
+       0 -> {Push 2; Eval; Update 3; ...})}
+
+
+
+Code for true
+ Code:{Pack 2, 0
+       Update 0
+       Pop 0
+       Unwind}
+
+
+
+Code for false
+ Code:{Pack 1, 0
+       Update 0
+       Pop 0
+       Unwind}
+
+
+
+Code for id
+ Code:{Pushglobal K
+       Pushglobal K
+       Pushglobal S
+       MkAppl
+       MkAppl
+       Eval
+       Update 0
+       Pop 0
+       Unwind}
+
+
+
+Code for main
+ Code:{Pushint 3
+       Pushglobal id
+       MkAppl
+       Eval
+       Update 0
+       Pop 0
+       Unwind}
+
+
+
+
+State transitions
+
+   1) Output:""
+       Stack:[]
+       Dump:[]
+      VStack:[]
+       Code:{Pushglobal main
+             Eval
+             Print}
+      
+      
+   2) Output:""
+       Stack:[#22: Global main]
+       Dump:[]
+      VStack:[]
+       Code:{Eval
+             Print}
+      
+      
+   3) Output:""
+       Stack:[#22: Global main]
+       Dump:[<{Print}, []>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+   4) Output:""
+       Stack:[#22: Global main]
+       Dump:[<{Print}, []>]
+      VStack:[]
+       Code:{Pushint 3
+             Pushglobal id
+             MkAppl
+             Eval
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   5) Output:""
+       Stack:[#22: Global main
+              #23: 3]
+       Dump:[<{Print}, []>]
+      VStack:[]
+       Code:{Pushglobal id
+             MkAppl
+             Eval
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   6) Output:""
+       Stack:[#22: Global main
+              #23: 3
+              #21: Global id]
+       Dump:[<{Print}, []>]
+      VStack:[]
+       Code:{MkAppl
+             Eval
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   7) Output:""
+       Stack:[#22: Global main
+              #24: Appl #21 #23]
+       Dump:[<{Print}, []>]
+      VStack:[]
+       Code:{Eval
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+   8) Output:""
+       Stack:[#24: Appl #21 #23]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+   9) Output:""
+       Stack:[#24: Appl #21 #23
+              #21: Global id]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  10) Output:""
+       Stack:[#24: Appl #21 #23
+              #21: Global id]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Pushglobal K
+             Pushglobal K
+             Pushglobal S
+             MkAppl
+             MkAppl
+             Eval
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+  11) Output:""
+       Stack:[#24: Appl #21 #23
+              #21: Global id
+              #2: Global K]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Pushglobal K
+             Pushglobal S
+             MkAppl
+             MkAppl
+             Eval
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+  12) Output:""
+       Stack:[#24: Appl #21 #23
+              #21: Global id
+              #2: Global K
+              #2: Global K]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Pushglobal S
+             MkAppl
+             MkAppl
+             Eval
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+  13) Output:""
+       Stack:[#24: Appl #21 #23
+              #21: Global id
+              #2: Global K
+              #2: Global K
+              #4: Global S]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{MkAppl
+             MkAppl
+             Eval
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+  14) Output:""
+       Stack:[#24: Appl #21 #23
+              #21: Global id
+              #2: Global K
+              #25: Appl #4 #2]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{MkAppl
+             Eval
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+  15) Output:""
+       Stack:[#24: Appl #21 #23
+              #21: Global id
+              #26: Appl #25 #2]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Eval
+             Update 0
+             Pop 0
+             Unwind}
+      
+      
+  16) Output:""
+       Stack:[#26: Appl #25 #2]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>
+             <{Update 0; Pop 0; Unwind}, [#21, #24]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  17) Output:""
+       Stack:[#26: Appl #25 #2
+              #25: Appl #4 #2]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>
+             <{Update 0; Pop 0; Unwind}, [#21, #24]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  18) Output:""
+       Stack:[#26: Appl #25 #2
+              #25: Appl #4 #2
+              #4: Global S]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>
+             <{Update 0; Pop 0; Unwind}, [#21, #24]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  19) Output:""
+       Stack:[#24: Appl #21 #23
+              #21: Global id
+              #26: Appl #25 #2]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Update 0
+             Pop 0
+             Unwind}
+      
+      
+  20) Output:""
+       Stack:[#24: Appl #21 #23
+              #21: Ind #26]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Pop 0
+             Unwind}
+      
+      
+  21) Output:""
+       Stack:[#24: Appl #21 #23
+              #21: Ind #26]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  22) Output:""
+       Stack:[#24: Appl #21 #23
+              #26: Appl #25 #2]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  23) Output:""
+       Stack:[#24: Appl #21 #23
+              #26: Appl #25 #2
+              #25: Appl #4 #2]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  24) Output:""
+       Stack:[#24: Appl #21 #23
+              #26: Appl #25 #2
+              #25: Appl #4 #2
+              #4: Global S]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  25) Output:""
+       Stack:[#24: Appl #21 #23
+              #23: 3
+              #2: Global K
+              #2: Global K]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Push 2
+             Push 2
+             MkAppl
+             Push 3
+             Push 2
+             MkAppl
+             MkAppl
+             Eval
+             Update 3
+             Pop 3
+             Unwind}
+      
+      
+  26) Output:""
+       Stack:[#24: Appl #21 #23
+              #23: 3
+              #2: Global K
+              #2: Global K
+              #23: 3]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Push 2
+             MkAppl
+             Push 3
+             Push 2
+             MkAppl
+             MkAppl
+             Eval
+             Update 3
+             Pop 3
+             Unwind}
+      
+      
+  27) Output:""
+       Stack:[#24: Appl #21 #23
+              #23: 3
+              #2: Global K
+              #2: Global K
+              #23: 3
+              #2: Global K]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{MkAppl
+             Push 3
+             Push 2
+             MkAppl
+             MkAppl
+             Eval
+             Update 3
+             Pop 3
+             Unwind}
+      
+      
+  28) Output:""
+       Stack:[#24: Appl #21 #23
+              #23: 3
+              #2: Global K
+              #2: Global K
+              #27: Appl #2 #23]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Push 3
+             Push 2
+             MkAppl
+             MkAppl
+             Eval
+             Update 3
+             Pop 3
+             Unwind}
+      
+      
+  29) Output:""
+       Stack:[#24: Appl #21 #23
+              #23: 3
+              #2: Global K
+              #2: Global K
+              #27: Appl #2 #23
+              #23: 3]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Push 2
+             MkAppl
+             MkAppl
+             Eval
+             Update 3
+             Pop 3
+             Unwind}
+      
+      
+  30) Output:""
+       Stack:[#24: Appl #21 #23
+              #23: 3
+              #2: Global K
+              #2: Global K
+              #27: Appl #2 #23
+              #23: 3
+              #2: Global K]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{MkAppl
+             MkAppl
+             Eval
+             Update 3
+             Pop 3
+             Unwind}
+      
+      
+  31) Output:""
+       Stack:[#24: Appl #21 #23
+              #23: 3
+              #2: Global K
+              #2: Global K
+              #27: Appl #2 #23
+              #28: Appl #2 #23]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{MkAppl
+             Eval
+             Update 3
+             Pop 3
+             Unwind}
+      
+      
+  32) Output:""
+       Stack:[#24: Appl #21 #23
+              #23: 3
+              #2: Global K
+              #2: Global K
+              #29: Appl #28 #27]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Eval
+             Update 3
+             Pop 3
+             Unwind}
+      
+      
+  33) Output:""
+       Stack:[#29: Appl #28 #27]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>
+             <{Update 3; Pop 3; Unwind}, [#2, #2, #23, #24]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  34) Output:""
+       Stack:[#29: Appl #28 #27
+              #28: Appl #2 #23]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>
+             <{Update 3; Pop 3; Unwind}, [#2, #2, #23, #24]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  35) Output:""
+       Stack:[#29: Appl #28 #27
+              #28: Appl #2 #23
+              #2: Global K]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>
+             <{Update 3; Pop 3; Unwind}, [#2, #2, #23, #24]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  36) Output:""
+       Stack:[#29: Appl #28 #27
+              #27: Appl #2 #23
+              #23: 3]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>
+             <{Update 3; Pop 3; Unwind}, [#2, #2, #23, #24]>]
+      VStack:[]
+       Code:{Push 0
+             Eval
+             Update 2
+             Pop 2
+             Unwind}
+      
+      
+  37) Output:""
+       Stack:[#29: Appl #28 #27
+              #27: Appl #2 #23
+              #23: 3
+              #23: 3]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>
+             <{Update 3; Pop 3; Unwind}, [#2, #2, #23, #24]>]
+      VStack:[]
+       Code:{Eval
+             Update 2
+             Pop 2
+             Unwind}
+      
+      
+  38) Output:""
+       Stack:[#23: 3]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>
+             <{Update 3; Pop 3; Unwind}, [#2, #2, #23, #24]>
+             <{Update 2; Pop 2; Unwind}, [#23, #27, #29]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  39) Output:""
+       Stack:[#29: Appl #28 #27
+              #27: Appl #2 #23
+              #23: 3
+              #23: 3]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>
+             <{Update 3; Pop 3; Unwind}, [#2, #2, #23, #24]>]
+      VStack:[]
+       Code:{Update 2
+             Pop 2
+             Unwind}
+      
+      
+  40) Output:""
+       Stack:[#29: Ind #23
+              #27: Appl #2 #23
+              #23: 3]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>
+             <{Update 3; Pop 3; Unwind}, [#2, #2, #23, #24]>]
+      VStack:[]
+       Code:{Pop 2
+             Unwind}
+      
+      
+  41) Output:""
+       Stack:[#29: Ind #23]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>
+             <{Update 3; Pop 3; Unwind}, [#2, #2, #23, #24]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  42) Output:""
+       Stack:[#23: 3]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>
+             <{Update 3; Pop 3; Unwind}, [#2, #2, #23, #24]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  43) Output:""
+       Stack:[#24: Appl #21 #23
+              #23: 3
+              #2: Global K
+              #2: Global K
+              #23: 3]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Update 3
+             Pop 3
+             Unwind}
+      
+      
+  44) Output:""
+       Stack:[#24: Ind #23
+              #23: 3
+              #2: Global K
+              #2: Global K]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Pop 3
+             Unwind}
+      
+      
+  45) Output:""
+       Stack:[#24: Ind #23]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  46) Output:""
+       Stack:[#23: 3]
+       Dump:[<{Print}, []>
+             <{Update 0; Pop 0; Unwind}, [#22]>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  47) Output:""
+       Stack:[#22: Global main
+              #23: 3]
+       Dump:[<{Print}, []>]
+      VStack:[]
+       Code:{Update 0
+             Pop 0
+             Unwind}
+      
+      
+  48) Output:""
+       Stack:[#22: Ind #23]
+       Dump:[<{Print}, []>]
+      VStack:[]
+       Code:{Pop 0
+             Unwind}
+      
+      
+  49) Output:""
+       Stack:[#22: Ind #23]
+       Dump:[<{Print}, []>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  50) Output:""
+       Stack:[#23: 3]
+       Dump:[<{Print}, []>]
+      VStack:[]
+       Code:{Unwind}
+      
+      
+  51) Output:""
+       Stack:[#23: 3]
+       Dump:[]
+      VStack:[]
+       Code:{Print}
+      
+      
+  52) Output:"3 "
+       Stack:[]
+       Dump:[]
+      VStack:[]
+       Code:{}
+      
+      
+
+
+Steps taken = 51

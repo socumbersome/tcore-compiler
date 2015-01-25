@@ -1,0 +1,182 @@
+   1) Stk [  #5: NSupercomb main ]
+      
+   2) Stk [ #15: NAppl  #13  #14 (NNum 4) ]
+      
+   3) Stk [ #13: NAppl   #4  #12 (NNum 3)
+            #15: NAppl  #13  #14 (NNum 4) ]
+      
+   4) Stk [  #4: NSupercomb f
+            #13: NAppl   #4  #12 (NNum 3)
+            #15: NAppl  #13  #14 (NNum 4) ]
+      
+   5) Stk [ #23: NAppl   #2  #22 (NAppl #3 #21) ]
+      
+   6) Stk [  #2: NSupercomb fst
+            #23: NAppl   #2  #22 (NAppl #3 #21) ]
+      
+   7) Stk [ #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+   8) Stk [ #22: NAppl   #3  #21 (NAppl #3 #20)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+   9) Stk [  #3: NSupercomb snd
+            #22: NAppl   #3  #21 (NAppl #3 #20)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  10) Stk [ #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  11) Stk [ #21: NAppl   #3  #20 (NAppl #3 #16)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  12) Stk [  #3: NSupercomb snd
+            #21: NAppl   #3  #20 (NAppl #3 #16)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  13) Stk [ #26: NAppl  #20   #8 (NSupercomb K1)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  14) Stk [ #20: NAppl   #3  #16 (NAppl #18 #17)
+            #26: NAppl  #20   #8 (NSupercomb K1)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  15) Stk [  #3: NSupercomb snd
+            #20: NAppl   #3  #16 (NAppl #18 #17)
+            #26: NAppl  #20   #8 (NSupercomb K1)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  16) Stk [ #27: NAppl  #16   #8 (NSupercomb K1)
+            #26: NAppl  #20   #8 (NSupercomb K1)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  17) Stk [ #16: NAppl  #18  #17 (NAppl #19 #16)
+            #27: NAppl  #16   #8 (NSupercomb K1)
+            #26: NAppl  #20   #8 (NSupercomb K1)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  18) Stk [ #18: NAppl   #1  #12 (NNum 3)
+            #16: NAppl  #18  #17 (NAppl #19 #16)
+            #27: NAppl  #16   #8 (NSupercomb K1)
+            #26: NAppl  #20   #8 (NSupercomb K1)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  19) Stk [  #1: NSupercomb pair
+            #18: NAppl   #1  #12 (NNum 3)
+            #16: NAppl  #18  #17 (NAppl #19 #16)
+            #27: NAppl  #16   #8 (NSupercomb K1)
+            #26: NAppl  #20   #8 (NSupercomb K1)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  20) Stk [ #29: NAppl  #28  #17 (NAppl #19 #16)
+            #26: NAppl  #20   #8 (NSupercomb K1)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  21) Stk [ #28: NAppl   #8  #12 (NNum 3)
+            #29: NAppl  #28  #17 (NAppl #19 #16)
+            #26: NAppl  #20   #8 (NSupercomb K1)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  22) Stk [  #8: NSupercomb K1
+            #28: NAppl   #8  #12 (NNum 3)
+            #29: NAppl  #28  #17 (NAppl #19 #16)
+            #26: NAppl  #20   #8 (NSupercomb K1)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  23) Stk [ #17: NAppl  #19  #16 (NAppl #18 #17)
+            #26: NAppl  #20   #8 (NSupercomb K1)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  24) Stk [ #19: NAppl   #1  #14 (NNum 4)
+            #17: NAppl  #19  #16 (NAppl #18 #17)
+            #26: NAppl  #20   #8 (NSupercomb K1)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  25) Stk [  #1: NSupercomb pair
+            #19: NAppl   #1  #14 (NNum 4)
+            #17: NAppl  #19  #16 (NAppl #18 #17)
+            #26: NAppl  #20   #8 (NSupercomb K1)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  26) Stk [ #31: NAppl  #30  #16 (NAppl #18 #17)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  27) Stk [ #30: NAppl   #8  #14 (NNum 4)
+            #31: NAppl  #30  #16 (NAppl #18 #17)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  28) Stk [  #8: NSupercomb K1
+            #30: NAppl   #8  #14 (NNum 4)
+            #31: NAppl  #30  #16 (NAppl #18 #17)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  29) Stk [ #16: NAppl  #18  #17 (NAppl #19 #16)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  30) Stk [ #18: NAppl   #1  #12 (NNum 3)
+            #16: NAppl  #18  #17 (NAppl #19 #16)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  31) Stk [  #1: NSupercomb pair
+            #18: NAppl   #1  #12 (NNum 3)
+            #16: NAppl  #18  #17 (NAppl #19 #16)
+            #25: NAppl  #21   #8 (NSupercomb K1)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  32) Stk [ #33: NAppl  #32  #17 (NAppl #19 #16)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  33) Stk [ #32: NAppl   #8  #12 (NNum 3)
+            #33: NAppl  #32  #17 (NAppl #19 #16)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  34) Stk [  #8: NSupercomb K1
+            #32: NAppl   #8  #12 (NNum 3)
+            #33: NAppl  #32  #17 (NAppl #19 #16)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  35) Stk [ #17: NAppl  #19  #16 (NAppl #18 #17)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  36) Stk [ #19: NAppl   #1  #14 (NNum 4)
+            #17: NAppl  #19  #16 (NAppl #18 #17)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  37) Stk [  #1: NSupercomb pair
+            #19: NAppl   #1  #14 (NNum 4)
+            #17: NAppl  #19  #16 (NAppl #18 #17)
+            #24: NAppl  #22   #7 (NSupercomb K) ]
+      
+  38) Stk [ #35: NAppl  #34  #16 (NAppl #18 #17) ]
+      
+  39) Stk [ #34: NAppl   #7  #14 (NNum 4)
+            #35: NAppl  #34  #16 (NAppl #18 #17) ]
+      
+  40) Stk [  #7: NSupercomb K
+            #34: NAppl   #7  #14 (NNum 4)
+            #35: NAppl  #34  #16 (NAppl #18 #17) ]
+      
+  41) Stk [ #14: NNum 4 ]
+      
+
+
+Total number of steps = 40

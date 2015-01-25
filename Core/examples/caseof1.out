@@ -1,0 +1,14 @@
+pushglobal compose
+pushglobal Case#_0
+pushglobal t
+pushglobal f
+   1) Output:"[2: 2 [1: ] ] "
+       Stack:[]
+       Dump:[]
+      VStack:[]
+       Code:{}
+      
+      
+
+
+Steps taken = 62

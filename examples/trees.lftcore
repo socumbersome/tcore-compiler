@@ -1,0 +1,17 @@
+*pack1,0  = Pack{1,0};
+*pack2,3  = Pack{2,3};
+id x_0 = x_0;
+compose f_1 g_2 x_3 = f_1 (g_2 x_3);
+twice f_4 = compose f_4 f_4;
+prod_cps tree_5 cont_6 = case tree_5 of
+  {1}  -> cont_6 1,
+  {2} left_7 n_8 right_9 -> if n_8 == 0 then
+                              0
+                            else
+                              prod_cps left_7 ($sc_10 right_9 n_8 cont_6);
+$sc_15 pl_16 n_17 cont_18 pr_19 = cont_18 ((pl_16 * n_17) * pr_19);
+$sc_10 right_11 n_12 cont_13 pl_14 = prod_cps right_11 ($sc_15 pl_14 n_12 cont_13);
+prod tree_15 = prod_cps tree_15 $sc_16;
+$sc_16 x_17 = x_17;
+tr0  = *pack2,3 (*pack2,3 *pack1,0 2 (*pack2,3 *pack1,0 4 *pack1,0)) 3 (*pack2,3 (*pack2,3 *pack1,0 0 *pack1,0) 5 *pack1,0);
+main  = prod tr0

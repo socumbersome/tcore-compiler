@@ -1,0 +1,7 @@
+a = Pack{1, 0} ;
+b = Pack{2, 2} ;
+downfrom n = if n == 0 then
+  a//nil
+else
+  b n (downfrom (n - 1));
+main  = downfrom 4

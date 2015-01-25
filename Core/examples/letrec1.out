@@ -1,0 +1,20 @@
+pushglobal compose
+pushglobal K
+pushglobal K1
+pushglobal pair
+pushglobal pair
+pushglobal fst
+pushglobal snd
+pushglobal snd
+pushglobal snd
+pushglobal f
+   1) Output:"4 "
+       Stack:[]
+       Dump:[]
+      VStack:[]
+       Code:{}
+      
+      
+
+
+Steps taken = 199

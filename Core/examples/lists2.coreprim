@@ -1,0 +1,7 @@
+a  = Pack{1,0};
+b  = Pack{2,2};
+downfrom n_0 = if n_0 == 0 then
+  a
+else
+  b n_0 (downfrom (n_0 - 1));
+main  = downfrom 4

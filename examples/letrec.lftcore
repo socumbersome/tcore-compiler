@@ -1,0 +1,15 @@
+id x_0 = x_0;
+compose f_1 g_2 x_3 = f_1 (g_2 x_3);
+twice f_4 = compose f_4 f_4;
+main  = letrec
+  even_5 = $sc_7 odd_6;
+  odd_6 = $sc_10 even_5
+in even_5 7;
+$sc_7 odd_8 n_9 = if n_9 == 0 then
+  true
+else
+  odd_8 (n_9 - 1);
+$sc_10 even_11 n_12 = if n_12 == 0 then
+  false
+else
+  even_11 (n_12 - 1)

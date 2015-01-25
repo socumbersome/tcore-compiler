@@ -1,0 +1,34 @@
+f x = letrec g = \y. cons (x*y) (g y) in g 3 ;
+main = take 4 (f 6) ;
+
+length xs = case xs of
+	{1} -> 0 , 
+	{2} y ys -> 1 + length ys
+	;
+
+take n xs = case xs of
+	{1} -> nil ,
+	{2} y ys -> if n == 0 then nil else
+				cons y (take (n - 1) ys)
+	;
+
+take_ n xs = if n == 0 then nil else
+	case xs of
+	{1} -> nil ,
+	{2} y ys -> cons y (take (n - 1) ys)
+	;
+
+downfrom n = if n == 0 then nil else
+	cons n (downfrom (n - 1))
+	;
+
+make n a = if n == 0 then nil else
+		cons a (make (n - 1) a) ;
+
+from n = cons n (from (n + 1)) ;
+
+filter p xs = case xs of
+	{1} -> nil ,
+	{2} y ys -> let rest = filter p ys in
+		if p y then cons y rest else rest
+

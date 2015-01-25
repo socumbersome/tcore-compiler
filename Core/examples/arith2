@@ -1,0 +1,3 @@
+/* should return 8 */
+inc x = x + 1;
+main = twice twice inc 4

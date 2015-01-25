@@ -1,0 +1,8 @@
+
+length xs = case xs of
+	{1} -> 0 ,
+	{2} y ys -> 1 + length ys ;
+
+main = length (cons 1 (cons 2 (cons 3 nil))) ;
+cons = Pack{2,2} ;
+nil = Pack{1,0}

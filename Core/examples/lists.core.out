@@ -1,0 +1,7 @@
+*pack2,2  = Pack{2,2};
+*pack1,0  = Pack{1,0};
+downfrom n_8 = if n_8 == 0 then
+  *pack1,0
+else
+  *pack2,2 n_8 (downfrom (n_8 - 1));
+main  = downfrom 4

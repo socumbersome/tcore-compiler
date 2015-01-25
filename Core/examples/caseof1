@@ -1,0 +1,6 @@
+
+t a b = Pack{2,1} ;
+f x = Pack{2,2} (case t x 7 6 of
+	{1} -> 1,
+	{2} -> 2) Pack{1,0} ;
+main = f 3

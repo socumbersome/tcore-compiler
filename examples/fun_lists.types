@@ -1,0 +1,12 @@
+id :: forall a_1. a_1 -> a_1
+compose :: forall a_5 a_4 a_3. (a_5 -> a_4) -> (a_3 -> a_5) -> a_3 -> a_4
+twice :: forall a_5. (a_5 -> a_5) -> a_5 -> a_5
+k :: forall a_1 a_2. a_1 -> a_2 -> a_1
+k1 :: forall a_1 a_2. a_1 -> a_2 -> a_2
+cons :: forall a_1 a_2 a_5 a_4. a_1 -> a_2 -> (a_1 -> a_2 -> a_5) -> a_4 -> a_5
+nil :: forall a_1 a_2. a_1 -> a_2 -> a_2
+abort :: forall a_0. a_0
+hd :: forall a_4 a_5 a_6 a_2. ((a_4 -> a_5 -> a_4) -> a_6 -> a_2) -> a_2
+tl :: forall a_4 a_5 a_6 a_2. ((a_4 -> a_5 -> a_5) -> a_6 -> a_2) -> a_2
+infinite :: forall a_1 a_8 a_6 a_7. a_1 -> (a_1 -> a_8 -> a_6) -> a_7 -> a_6
+main :: forall a_1. a_1
