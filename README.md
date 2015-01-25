@@ -1,11 +1,12 @@
 # TCore compiler (a typed extension of Core language)
 
 1. Building
-2. Syntax
-3. Caveats
-4. Weird conventions
-5. Known bugs
-6. To do
+2. Pipeline
+3. Syntax
+4. Caveats
+5. Weird conventions
+6. Known bugs
+7. To do
 
 ## Building
 
@@ -13,7 +14,7 @@ Run `make` command (and make sure you have OCaml in version at least 4.02.1) and
 (and please don't be scared from the plethora of warnings :))
 
 Usage:
-correct invokation has the form: tcore_compiler s n
+correct invokation has the form: `tcore_compiler s n`
 where `s` is a path to a TCore source file and `n` is a number
 from 1 to 5 with the following meaning:
 
@@ -22,6 +23,15 @@ from 1 to 5 with the following meaning:
 * 3 - print lifted Core program (is not a Core source program)
 * 4 - run program on G-machine and print all intermediate states
 * 5 - run program on G-machine and print the final state only
+
+## Pipeline
+
+TCore compiler essentially can do two things by itself: compile TCore program to Core program and infer types for functions in TCore program.
+In `Core` directory, there is Core compiler (that TCore uses for additional functionality) that can do:
+
+* Transform Core program into intermediate form by lifting case expressions, lambda abstractions and so on
+* Compile intermediate Core program into G-machine code (which isn't exactly a flat code because G-machine has also its stack, heap etc.)
+* Evaluate G-machine program (i.e. interpret it)
 
 ## Syntax
 
@@ -69,7 +79,7 @@ depth exactly 1
 ## Weird conventions
 
 * Because Core is untyped and doesn't carry type information from TCore, its output has only two forms: either it's a number, or a structure with a tag, arity and list of contents that again can be numbers or structures.
-* true value is represented as a structure [2: ], and false as [1: ]
+* true value is represented as a structure `[2: ]`, and false as `[1: ]`
 
 ## Known bugs
 
