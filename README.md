@@ -37,7 +37,7 @@ In `Core` directory, there is Core compiler (that TCore uses for additional func
 
 Instead of presenting formal BNF grammar, please have a look at
 a (hopefully) exhaustive example and you should quickly get the feel
-of how to write TCore programs:
+of how to write TCore programs (yes, Nil and Cons is built-in! :)):
 
 <pre>
 type Tree a = Leaf | Node (Tree a) a (Tree a) ;
