@@ -18,7 +18,7 @@ correct invokation has the form: `tcore_compiler s n`
 where `s` is a path to a TCore source file and `n` is a number
 from 1 to 5 with the following meaning:
 
-* 1 - print inferred types\n
+* 1 - print inferred types
 * 2 - print raw Core program (is a Core source program)
 * 3 - print lifted Core program (is not a Core source program)
 * 4 - run program on G-machine and print all intermediate states
