@@ -14,11 +14,11 @@ correct invokation has the form: tcore_compiler s n
 where `s` is a path to a TCore source file and `n` is a number
 from 1 to 5 with the following meaning:
 
-* - 1 - print inferred types\n" ^
-* - 2 - print raw Core program (is a Core source program)
-* - 3 - print lifted Core program (is not a Core source program)
-* - 4 - run program on G-machine and print all intermediate states
-* - 5 - run program on G-machine and print the final state only
+* 1 - print inferred types\n
+* 2 - print raw Core program (is a Core source program)
+* 3 - print lifted Core program (is not a Core source program)
+* 4 - run program on G-machine and print all intermediate states
+* 5 - run program on G-machine and print the final state only
 
 ## Syntax
 
@@ -39,6 +39,8 @@ prod tree cont = case tree of
 		)
 	;
 
+sum3 = \x y z. x + y + z ;
+
 iseven n = letrec
 	even = \n. if n == 0 then true else odd (n - 1) ;
 	odd = \n. if n == 0 then false else even (n - 1)
@@ -50,7 +52,8 @@ map f xs = case xs of
 	Cons y ys -> Cons (f y) (map f ys)
 	;
 
-main = prod (Node (Node Leaf 2 (Node Leaf 4 Leaf) ) 3 
-	(Node (Node Leaf 1 Leaf) 5 Leaf )) (\ x . x) == 120
+main = let t = Node (Node Leaf 2 (Node Leaf 4 Leaf) ) 3 
+	(Node (Node Leaf 1 Leaf) 5 Leaf )
+	in prod t (\ x . x) == 120
 
 </pre>
