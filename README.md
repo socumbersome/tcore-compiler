@@ -92,3 +92,7 @@ depth exactly 1 (so `Cons y ys` is valid, but `x` or `Cons (Cons y ys) zs` are n
 * Implement a garbage collector
 * Implement tail recursion
 
+## Based on
+* Implementing functional languages: a tutorial by Simon Peyton Jones and David Lester
+* The Implementation of Functional Programming Languages by Simon Peyton Jones
+
